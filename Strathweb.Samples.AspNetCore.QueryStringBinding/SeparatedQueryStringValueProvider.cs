@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Http;
@@ -13,20 +14,23 @@ namespace Strathweb.Samples.AspNetCore.QueryStringBinding
         private readonly HashSet<string> _keys;
         private readonly string _separator;
         private readonly IQueryCollection _values;
+        private readonly bool _removeEnclosingQuotes;
 
         public SeparatedQueryStringValueProvider(IQueryCollection values, CultureInfo culture)
             : base(null, values, culture)
         {
         }
 
-        public SeparatedQueryStringValueProvider(string key, IQueryCollection values, string separator)
-            : this(new List<string> { key }, values, separator)
+        public SeparatedQueryStringValueProvider(BindingSource bindingSource, string key, IQueryCollection values, string separator, bool removeEnclosingQuotes)
+            : this(bindingSource, new List<string> { key }, values, separator, removeEnclosingQuotes)
         {
         }
 
-        public SeparatedQueryStringValueProvider(IEnumerable<string> keys, IQueryCollection values, string separator)
-            : base(BindingSource.Query, values, CultureInfo.InvariantCulture)
+        public SeparatedQueryStringValueProvider(BindingSource bindingSource, IEnumerable<string> keys, IQueryCollection values, string separator, 
+            bool removeEnclosingQuotes)
+            : base(bindingSource, values, CultureInfo.InvariantCulture)
         {
+            _removeEnclosingQuotes = removeEnclosingQuotes;
             _keys = new HashSet<string>(keys);
             _values = values;
             _separator = separator;
@@ -45,12 +49,23 @@ namespace Strathweb.Samples.AspNetCore.QueryStringBinding
                 result.Values.Any(x => x.IndexOf(_separator, StringComparison.OrdinalIgnoreCase) > 0))
             {
                 var splitValues = new StringValues(result.Values
-                    .SelectMany(x => x.Split(new[] { _separator }, StringSplitOptions.None)).ToArray());
+                    .SelectMany(x =>
+                    {
+                        var values = x.Split(new[] {_separator}, StringSplitOptions.None);
+                        return _removeEnclosingQuotes
+                            ? values.Select(_RemoveEnclosingQuotes)
+                            : values;
+                    }).ToArray());
 
                 return new ValueProviderResult(splitValues, result.Culture);
             }
 
             return result;
+        }
+
+        public string _RemoveEnclosingQuotes(string text)
+        {
+            return text.Substring(1, text.Length - 2);
         }
     }
 }

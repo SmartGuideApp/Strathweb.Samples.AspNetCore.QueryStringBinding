@@ -8,16 +8,16 @@ namespace Strathweb.Samples.AspNetCore.QueryStringBinding
     {
         private readonly SeparatedQueryStringValueProviderFactory _factory;
 
-        public SeparatedQueryStringAttribute() : this(",") { }
+        public SeparatedQueryStringAttribute(bool removeEnclosingQuotes) : this(",", removeEnclosingQuotes) { }
 
-        public SeparatedQueryStringAttribute(string separator)
+        public SeparatedQueryStringAttribute(string separator, bool removeEnclosingQuotes)
         {
-            _factory = new SeparatedQueryStringValueProviderFactory(separator);
+            _factory = new SeparatedQueryStringValueProviderFactory(separator, removeEnclosingQuotes);
         }
 
-        public SeparatedQueryStringAttribute(string key, string separator)
+        public SeparatedQueryStringAttribute(string key, string separator, bool removeEnclosingQuotes)
         {
-            _factory = new SeparatedQueryStringValueProviderFactory(key, separator);
+            _factory = new SeparatedQueryStringValueProviderFactory(key, separator, removeEnclosingQuotes);
         }
 
         public void OnResourceExecuted(ResourceExecutedContext context)
