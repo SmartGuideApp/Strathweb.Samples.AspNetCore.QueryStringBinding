@@ -5,11 +5,15 @@ namespace Strathweb.Samples.AspNetCore.QueryStringBinding
 {
     public class CommaSeparatedQueryStringConvention : IActionModelConvention
     {
-        private readonly bool _removeEnclosingQuotes;
+        private readonly bool _isCommaSeparatedCollectionSwaggerText;
+        private readonly string _separator;
 
-        public CommaSeparatedQueryStringConvention(bool removeEnclosingQuotes = false)
+        public CommaSeparatedQueryStringConvention(
+            string separator = ",",
+            bool isCommaSeparatedCollectionSwaggerText = false)
         {
-            _removeEnclosingQuotes = removeEnclosingQuotes;
+            _separator = separator;
+            _isCommaSeparatedCollectionSwaggerText = isCommaSeparatedCollectionSwaggerText;
         }
 
         public void Apply(ActionModel action)
@@ -21,7 +25,7 @@ namespace Strathweb.Samples.AspNetCore.QueryStringBinding
                 {
                     if (attribute == null)
                     {
-                        attribute = new SeparatedQueryStringAttribute(",", _removeEnclosingQuotes);
+                        attribute = new SeparatedQueryStringAttribute(_separator, _isCommaSeparatedCollectionSwaggerText);
                         parameter.Action.Filters.Add(attribute);
                     }
 

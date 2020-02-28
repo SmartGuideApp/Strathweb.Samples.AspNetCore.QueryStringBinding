@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Strathweb.Samples.AspNetCore.QueryStringBinding", "Strathweb.Samples.AspNetCore.QueryStringBinding\Strathweb.Samples.AspNetCore.QueryStringBinding.csproj", "{D371DE0F-BA2A-4EF7-8D54-F6693A82F871}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strathweb.Samples.AspNetCore.QueryStringBinding.Tests", "Strathweb.Samples.AspNetCore.QueryStringBinding.Tests\Strathweb.Samples.AspNetCore.QueryStringBinding.Tests.csproj", "{28A39D71-FF83-4B2F-97B5-9F0A1E7FE7E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +17,15 @@ Global
 		{D371DE0F-BA2A-4EF7-8D54-F6693A82F871}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D371DE0F-BA2A-4EF7-8D54-F6693A82F871}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D371DE0F-BA2A-4EF7-8D54-F6693A82F871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A39D71-FF83-4B2F-97B5-9F0A1E7FE7E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A39D71-FF83-4B2F-97B5-9F0A1E7FE7E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A39D71-FF83-4B2F-97B5-9F0A1E7FE7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A39D71-FF83-4B2F-97B5-9F0A1E7FE7E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D693A41-3A4D-48FE-851A-52B32CB7AB94}
 	EndGlobalSection
 EndGlobal

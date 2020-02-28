@@ -11,18 +11,18 @@ namespace Strathweb.Samples.AspNetCore.QueryStringBinding
     {
         private readonly string _separator;
         private HashSet<string> _keys;
-        private readonly bool _removeEnclosingQuotes;
+        private readonly bool _isCommaSeparatedCollectionSwaggerText;
 
-        public SeparatedQueryStringValueProviderFactory(string separator, bool removeEnclosingQuotes) : this((IEnumerable<string>)null, separator, removeEnclosingQuotes)
+        public SeparatedQueryStringValueProviderFactory(string separator, bool isCommaSeparatedCollectionSwaggerText) : this((IEnumerable<string>)null, separator, isCommaSeparatedCollectionSwaggerText)
         { }
 
-        public SeparatedQueryStringValueProviderFactory(string key, string separator, bool removeEnclosingQuotes) : this(new List<string> { key }, separator, removeEnclosingQuotes)
+        public SeparatedQueryStringValueProviderFactory(string key, string separator, bool isCommaSeparatedCollectionSwaggerText) : this(new List<string> { key }, separator, isCommaSeparatedCollectionSwaggerText)
         {
         }
 
-        public SeparatedQueryStringValueProviderFactory(IEnumerable<string> keys, string separator, bool removeEnclosingQuotes)
+        public SeparatedQueryStringValueProviderFactory(IEnumerable<string> keys, string separator, bool isCommaSeparatedCollectionSwaggerText)
         {
-            _removeEnclosingQuotes = removeEnclosingQuotes;
+            _isCommaSeparatedCollectionSwaggerText = isCommaSeparatedCollectionSwaggerText;
             _keys = keys != null ? new HashSet<string>(keys) : null;
             _separator = separator;
         }
@@ -39,7 +39,7 @@ namespace Strathweb.Samples.AspNetCore.QueryStringBinding
 
             context.ValueProviders.Insert(0,
                 new SeparatedQueryStringValueProvider(bindingSource, _keys, queryCollection,
-                    _separator, removeEnclosingQuotes: _removeEnclosingQuotes));
+                    _separator, isCommaSeparatedCollectionSwaggerText: _isCommaSeparatedCollectionSwaggerText));
             return Task.CompletedTask;
         }
 

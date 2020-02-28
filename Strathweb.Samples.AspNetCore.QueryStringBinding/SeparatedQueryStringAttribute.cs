@@ -8,16 +8,16 @@ namespace Strathweb.Samples.AspNetCore.QueryStringBinding
     {
         private readonly SeparatedQueryStringValueProviderFactory _factory;
 
-        public SeparatedQueryStringAttribute(bool removeEnclosingQuotes) : this(",", removeEnclosingQuotes) { }
+        public SeparatedQueryStringAttribute(bool isCommaSeparatedCollectionSwaggerText) : this(",", isCommaSeparatedCollectionSwaggerText) { }
 
-        public SeparatedQueryStringAttribute(string separator, bool removeEnclosingQuotes)
+        public SeparatedQueryStringAttribute(string separator, bool isCommaSeparatedCollectionSwaggerText)
         {
-            _factory = new SeparatedQueryStringValueProviderFactory(separator, removeEnclosingQuotes);
+            _factory = new SeparatedQueryStringValueProviderFactory(separator, isCommaSeparatedCollectionSwaggerText);
         }
 
-        public SeparatedQueryStringAttribute(string key, string separator, bool removeEnclosingQuotes)
+        public SeparatedQueryStringAttribute(string key, string separator, bool isCommaSeparatedCollectionSwaggerText)
         {
-            _factory = new SeparatedQueryStringValueProviderFactory(key, separator, removeEnclosingQuotes);
+            _factory = new SeparatedQueryStringValueProviderFactory(key, separator, isCommaSeparatedCollectionSwaggerText);
         }
 
         public void OnResourceExecuted(ResourceExecutedContext context)
