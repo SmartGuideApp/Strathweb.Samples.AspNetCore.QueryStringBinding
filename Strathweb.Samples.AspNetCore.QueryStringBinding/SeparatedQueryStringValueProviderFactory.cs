@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+#if (NETCOREAPP2_2 || NETCOREAPP2_1 || NETCOREAPP2_0 || NETCOREAPP1_1 || NETCOREAPP1_0)
 using Microsoft.AspNetCore.Http.Internal;
+#endif
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Strathweb.Samples.AspNetCore.QueryStringBinding
